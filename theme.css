@@ -1,0 +1,668 @@
+/* ==============================================================
+   PROTOSS THEME — Obsidian.md
+   Refactored & optimized for runtime performance.
+   Fonts: Jura, Orbitron, Oxanium
+   ============================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Orbitron:wght@400..900&family=Oxanium:wght@200..800&display=swap");
+
+/* --------------------------------------------------------------
+   1. DESIGN TOKENS
+   Raw colors + reusable glow values, defined once instead of
+   repeated inline across a dozen selectors.
+   -------------------------------------------------------------- */
+:root {
+  --protoss-background-color: #061727;
+  --protoss-background-color-alt: #0d1219;
+  --protoss-yellow-color: #c9a03c;
+  --protoss-cyan-color: #4adede;
+  --protoss-purple-color: #5f3082;
+  --protoss-white-color: #dfdfdf;
+
+  --glow-cyan-soft: rgba(0, 200, 255, 0.3);
+  --glow-cyan-strong: rgba(77, 238, 255, 0.6);
+  --glow-gold-soft: rgba(255, 215, 0, 0.3);
+  --glow-gold-strong: rgba(255, 211, 107, 0.4);
+
+  --t-fast: 0.2s ease;
+  --t-med: 0.35s ease;
+}
+
+/* --------------------------------------------------------------
+   2. TYPOGRAPHY
+   Scoped to actual text surfaces — NOT the universal selector.
+   The original used `* { font-family / letter-spacing }`, which
+   forces a style recalculation on every node in the DOM on every
+   theme/CSS reload, and overrides the font on icon glyphs too
+   (Obsidian's icon set is a literal font), which can silently
+   turn icons into blank boxes or wrong glyphs. Scoping this to
+   text containers keeps the look without either cost.
+   -------------------------------------------------------------- */
+body {
+  font-family: "Oxanium", sans-serif;
+  font-size: 13px;
+}
+
+.markdown-rendered,
+.markdown-source-view,
+.cm-editor,
+.workspace-tab-header,
+.nav-file-title,
+.nav-folder-title,
+.suggestion-item,
+.metadata-property,
+.callout {
+  font-family: "Oxanium", sans-serif;
+  letter-spacing: 1.5px;
+  font-size: 13px;
+}
+
+.theme-dark {
+  font-family: "Oxanium", sans-serif;
+  font-size: 13px;
+
+  /* Background */
+  --background-primary: var(--protoss-background-color);
+  --background-primary-alt: var(--protoss-background-color-alt);
+  --background-secondary: var(--protoss-background-color-alt);
+  --background-secondary-alt: var(--protoss-background-color);
+  --background-modifier-hover: var(--protoss-yellow-color);
+
+  /* Text */
+  --text-normal: var(--protoss-white-color);
+  --text-muted: var(--protoss-cyan-color);
+  --text-faint: var(--protoss-cyan-color);
+  --text-on-accent: var(--protoss-cyan-color);
+  --text-on-accent-inverted: var(--protoss-yellow-color);
+  --text-accent: var(--protoss-cyan-color);
+  --text-accent-hover: var(--protoss-yellow-color);
+
+  --caret-color: var(--protoss-yellow-color);
+  --border-width: 2.5px;
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 12px;
+  --radius-xl: 16px;
+
+  /* Headings */
+  --h1-color: var(--protoss-yellow-color);
+  --h2-color: var(--protoss-yellow-color);
+  --h3-color: var(--protoss-yellow-color);
+  --h4-color: var(--protoss-yellow-color);
+  --h5-color: var(--protoss-yellow-color);
+  --h6-color: var(--protoss-yellow-color);
+
+  --h1-size: 2.25em;
+  --h2-size: 2em;
+  --h3-size: 1.75em;
+  --h4-size: 1.5em;
+  --h5-size: 1.25em;
+  --h6-size: 1em;
+
+  --h1-weight: 600;
+  --h2-weight: 600;
+  --h3-weight: 600;
+  --h4-weight: 600;
+  --h5-weight: 600;
+  --h6-weight: 600;
+
+  --h1-font: "Orbitron", sans-serif;
+  --h2-font: "Orbitron", sans-serif;
+  --h3-font: "Orbitron", sans-serif;
+  --h4-font: "Orbitron", sans-serif;
+  --h5-font: "Orbitron", sans-serif;
+  --h6-font: "Orbitron", sans-serif;
+
+  --list-marker-color: var(--protoss-cyan-color);
+
+  --metadata-divider-color: var(--protoss-yellow-color);
+  --metadata-divider-color-focus: var(--protoss-yellow-color);
+  --metadata-divider-color-hover: var(--protoss-yellow-color);
+  --metadata-label-font-size: 1.15em;
+  --metadata-label-font-weight: 600;
+  --metadata-label-text-color: var(--protoss-yellow-color);
+  --metadata-label-text-color-hover: var(--protoss-cyan-color);
+  --metadata-property-radius: 10px;
+  --metadata-property-padding: 2.5px;
+
+  --blockquote-color: var(--protoss-yellow-color);
+  --blockquote-background-color: #0b2d4d;
+  --blockquote-border-color: var(--protoss-yellow-color);
+  --blockquote-border-thickness: 7.5px;
+  --blockquote-font-style: "Jura", sans-serif;
+
+  --callout-title-color: var(--protoss-white-color);
+  --callout-radius: 0px;
+
+  --table-header-background: var(--protoss-background-color-alt);
+  --table-header-color: var(--protoss-yellow-color);
+  --table-header-size: 1.5em;
+  --table-header-weight: 800;
+  --table-header-border-color: var(--protoss-yellow-color);
+  --table-border-color: var(--protoss-yellow-color);
+
+  --tag-color-hover: var(--protoss-background-color-alt);
+  --tag-background-hover: var(--protoss-yellow-color);
+  --tag-border-color-hover: var(--protoss-background-color-alt);
+  --tag-background: var(--protoss-background-color-alt);
+  --tag-color: var(--protoss-yellow-color);
+  --tag-border-color: var(--protoss-yellow-color);
+  --tag-weight: 600;
+  --tag-radius: 2.5px;
+
+  --icon-color: var(--protoss-yellow-color);
+
+  --graph-line: #09559d;
+  --graph-node: var(--protoss-yellow-color);
+  --graph-text: var(--protoss-yellow-color);
+
+  --color-accent: var(--protoss-yellow-color);
+  --graph-controls-width: 250px;
+
+  --vault-profile-font-weight: 600;
+  --vault-profile-color: green;
+
+  --dropdown-background: var(--protoss-background-color);
+}
+
+/* --------------------------------------------------------------
+   3. INLINE MARKDOWN STYLING
+   -------------------------------------------------------------- */
+.cm-header,
+.cm-header-1 {
+  color: var(--protoss-yellow-color);
+  letter-spacing: 2.5px;
+  text-shadow: 0 0 10px var(--protoss-yellow-color);
+}
+
+.cm-strong,
+.cm-em {
+  color: var(--protoss-cyan-color);
+}
+
+.cm-strikethrough {
+  color: var(--protoss-purple-color);
+}
+
+.cm-highlight {
+  color: #000;
+  background-color: var(--protoss-yellow-color);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-shadow: 0 0 5px var(--glow-gold-soft), 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+/* --------------------------------------------------------------
+   4. CALLOUTS
+   `contain: paint` scopes the repaint work triggered by the
+   hover glow to the callout's own box instead of letting the
+   browser re-check siblings/ancestors on every animation frame.
+   The sweep highlight now animates `transform` instead of `left`
+   — `left` is a layout property (forces reflow every frame),
+   `transform` is compositor-only (GPU, no reflow).
+   -------------------------------------------------------------- */
+.callout {
+  position: relative;
+  overflow: hidden;
+  contain: paint;
+  border: 2px solid #00c8ff;
+  border-radius: 25px 0 25px 0;
+  background: linear-gradient(180deg, #18232f 0%, #0c1218 100%);
+  box-shadow: inset 0 0 8px var(--glow-cyan-soft), 0 0 10px var(--glow-cyan-soft);
+  transition: box-shadow var(--t-med), transform var(--t-med);
+}
+
+.callout::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.02) 0px,
+    rgba(255, 255, 255, 0.02) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+}
+
+.callout-title {
+  background: linear-gradient(90deg, #00354a, #006a91);
+  color: #7cefff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  border-bottom: 1px solid #00c8ff;
+}
+
+.callout-content {
+  color: #d9f8ff;
+}
+
+.callout::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.callout:hover::after {
+  transform: translateX(220%);
+}
+
+.callout[data-callout="terran"] {
+  border-color: #00c8ff;
+}
+.callout[data-callout="protoss"] {
+  border-color: #ffd700;
+}
+.callout[data-callout="zerg"] {
+  border-color: #b000ff;
+}
+
+.callout:hover {
+  border-color: #4deeff;
+  box-shadow: inset 0 0 12px var(--glow-cyan-strong), 0 0 18px var(--glow-cyan-strong);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------
+   5. TABLES
+   `transition: all` swapped for the explicit properties that
+   actually change on hover — `all` makes the browser watch every
+   animatable property on the element for every frame, which is
+   needless overhead when only 2-3 properties move.
+   -------------------------------------------------------------- */
+.markdown-rendered table {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(rgba(15, 20, 45, 0.9), rgba(15, 20, 45, 0.9)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon points='30,0 60,15 60,37 30,52 0,37 0,15' fill='none' stroke='%23334466' stroke-width='1'/%3E%3C/svg%3E");
+  border: 1px solid #ffd700;
+  border-collapse: collapse;
+  box-shadow: 0 0 8px var(--glow-gold-soft), inset 0 0 8px rgba(0, 180, 255, 0.15);
+}
+
+.markdown-rendered table::before {
+  content: "";
+  display: block;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00d4ff, #ffd700, #00d4ff, transparent);
+  box-shadow: 0 0 10px #00d4ff, 0 0 20px #ffd700;
+}
+
+.markdown-rendered th {
+  background: linear-gradient(180deg, #2f275a, #1d163e);
+  color: #ffe87a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #ffd700;
+}
+
+.markdown-rendered td {
+  color: #d7e8ff;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.markdown-rendered th,
+.markdown-rendered td {
+  padding: 10px;
+}
+
+.markdown-rendered td:first-child {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.markdown-rendered tbody tr {
+  transition: background var(--t-fast), box-shadow var(--t-fast), color var(--t-fast);
+}
+
+.markdown-rendered tbody tr:hover {
+  background: rgba(0, 180, 255, 0.12);
+  box-shadow: inset 0 0 12px rgba(0, 200, 255, 0.4);
+  color: white;
+}
+
+/* --------------------------------------------------------------
+   6. CHECKBOXES / TASK LISTS
+   Drop-shadow filters are heavier than box-shadow (each layer is
+   its own blur+composite pass), so the stack is trimmed from
+   2-3 layers down to the minimum that still reads as a glow.
+   -------------------------------------------------------------- */
+input[type="checkbox"] {
+  filter: drop-shadow(0 0 4px #00d4ff);
+  transition: filter var(--t-fast);
+}
+
+input[type="checkbox"]:hover {
+  filter: drop-shadow(0 0 8px #00d4ff);
+}
+
+.HyperMD-task-line,
+li.task-list-item {
+  position: relative;
+  transition: background var(--t-fast), box-shadow var(--t-fast);
+}
+
+li.task-list-item:hover {
+  background: rgba(0, 212, 255, 0.05);
+  box-shadow: inset 2px 0 0 #00d4ff, 0 0 10px rgba(0, 212, 255, 0.2);
+  border-radius: 4px;
+}
+
+li.task-list-item.is-checked {
+  color: #ffe08a;
+}
+
+li.task-list-item.is-checked .task-list-item-checkbox {
+  filter: drop-shadow(0 0 6px #ffd700);
+}
+
+li.task-list-item::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 12px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow: 0 0 5px #00d4ff;
+}
+
+/* --------------------------------------------------------------
+   7. NESTED LISTS
+   -------------------------------------------------------------- */
+.markdown-rendered ul ul {
+  border-left: 1px solid rgba(0, 212, 255, 0.3);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.markdown-rendered ul ul:hover {
+  border-left-color: #00d4ff;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+}
+
+ul ul li::before {
+  background: #00d4ff;
+}
+ul ul ul li::before {
+  background: #ffd700;
+}
+ul ul ul ul li::before {
+  background: #ffffff;
+}
+
+/* --------------------------------------------------------------
+   8. SUGGESTION / QUICK-SWITCHER ITEMS
+   Same `left` → `transform` swap as the callout sweep. This one
+   matters more in practice: quick switcher / command palette can
+   render dozens of suggestion items, so a layout-triggering
+   animation here is multiplied across every visible row.
+   -------------------------------------------------------------- */
+.suggestion-item {
+  position: relative;
+  overflow: hidden;
+  contain: paint;
+}
+
+.suggestion-item::before {
+  content: "◈";
+  color: #00d4ff;
+  margin-right: 10px;
+  text-shadow: 0 0 5px #00d4ff;
+}
+
+.suggestion-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -25%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.15), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+
+.suggestion-item:hover::after {
+  transform: translateX(240%);
+}
+
+.suggestion-item.is-selected {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 215, 0, 0.15),
+    rgba(255, 215, 0, 0.8),
+    rgba(255, 215, 0, 0.15)
+  );
+  color: white;
+  box-shadow: inset 0 0 10px var(--glow-gold-strong), 0 0 15px var(--glow-gold-strong);
+}
+
+/* --------------------------------------------------------------
+   9. PROMPT (command palette / modal frame)
+   -------------------------------------------------------------- */
+.prompt {
+  contain: paint;
+  border: 1px solid #ffd700;
+  box-shadow: 0 0 12px var(--glow-gold-soft), inset 0 0 20px rgba(0, 212, 255, 0.08);
+  clip-path: polygon(
+    20px 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% calc(100% - 20px),
+    calc(100% - 20px) 100%,
+    20px 100%,
+    0 calc(100% - 20px),
+    0 20px
+  );
+  transition: box-shadow var(--t-med);
+}
+
+.prompt:hover {
+  box-shadow: 0 0 18px #00d4ff, 0 0 28px var(--glow-gold-strong), inset 0 0 20px rgba(0, 212, 255, 0.12);
+}
+
+/* --------------------------------------------------------------
+   10. SCROLLBAR
+   -------------------------------------------------------------- */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00d4ff, #ffd700);
+  border-radius: 10px;
+  box-shadow: 0 0 6px #00d4ff;
+}
+
+/* --------------------------------------------------------------
+   11. SIDEBAR / FILE EXPLORER
+   -------------------------------------------------------------- */
+.nav-folder,
+.nav-file {
+  border-left: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+.nav-file:hover,
+.nav-folder:hover {
+  border-left: 1px solid #00d4ff;
+  box-shadow: inset 3px 0 0 #00d4ff;
+}
+
+/* Deep-space sidebar background: a dark navy/indigo gradient with
+   a static starfield of small radial-gradient dots. This is a
+   single flat paint (no animation, no JS), so it costs the same
+   as any other background — it just has more visual depth than a
+   flat near-black fill. Applied to BOTH sidebars; the original
+   only styled the left one, so the right sidebar (backlinks,
+   outline, tags, etc.) was falling back to Obsidian's default
+   gray panel color. */
+.workspace-split.mod-left-split,
+.workspace-split.mod-right-split {
+  background-color: #060a0d !important;
+  background-image: radial-gradient(circle at 12% 22%, rgba(255, 255, 255, 0.55) 0.6px, transparent 1.2px),
+    radial-gradient(circle at 68% 58%, rgba(255, 255, 255, 0.4) 0.6px, transparent 1.2px),
+    radial-gradient(circle at 38% 82%, rgba(125, 226, 255, 0.45) 0.7px, transparent 1.4px),
+    radial-gradient(circle at 85% 18%, rgba(201, 160, 60, 0.35) 0.7px, transparent 1.4px),
+    linear-gradient(180deg, #0c1530 0%, #050912 45%, #03060c 100%);
+  background-size: 160px 160px, 190px 190px, 220px 220px, 240px 240px, 100% 100%;
+  background-repeat: repeat;
+  box-shadow: 5px 0 16px rgba(0, 255, 255, 0.08);
+}
+
+/* Force transparency for child elements */
+.workspace-split.mod-left-split .workspace-leaf-content,
+.workspace-split.mod-right-split .workspace-leaf-content,
+.workspace-split.mod-left-split .view-content,
+.workspace-split.mod-right-split .view-content,
+.workspace-split.mod-left-split .nav-files-container,
+.workspace-split.mod-right-split .nav-files-container {
+  background: transparent !important;
+}
+
+.workspace-split.mod-left-split {
+  border-right: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.workspace-split.mod-right-split {
+  border-left: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+
+.nav-files-container {
+  padding: 8px;
+}
+
+.nav-file-title {
+  color: #7de2ff;
+  font-family: monospace;
+  padding: 6px 8px;
+  margin: 2px 0;
+  border-left: 2px solid transparent;
+  transition: background var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast),
+    transform var(--t-fast);
+}
+
+.nav-file-title:hover {
+  border-left: 2px solid #00ffff;
+  background: rgba(0, 255, 255, 0.05);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
+  transform: translateX(2px);
+}
+
+.nav-file-title.is-active {
+  color: #ffd36b;
+  border-left: 2px solid #ffd36b;
+  background: rgba(255, 211, 107, 0.08);
+  box-shadow: 0 0 14px var(--glow-gold-strong);
+}
+
+.workspace-ribbon.mod-left {
+  background: linear-gradient(90deg, #05070d, #06121f);
+  border-right: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+/* --------------------------------------------------------------
+   12. TABS
+   `backdrop-filter` forces its own compositing layer that gets
+   recalculated on scroll under it. It's kept here since it's a
+   single small fixed strip, not animated — if you notice scroll
+   jank in long notes, this is the first thing to drop.
+   -------------------------------------------------------------- */
+.workspace-tab-header-container {
+  background: rgba(5, 10, 20, 0.7);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.workspace-tab-header {
+  color: #7de2ff;
+  font-family: monospace;
+  border: 1px solid transparent;
+  transition: background var(--t-fast), box-shadow var(--t-fast);
+}
+
+.workspace-tab-header:hover {
+  background: rgba(0, 255, 255, 0.05);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+}
+
+.workspace-tab-header.is-active {
+  color: #ffd36b;
+  background: rgba(255, 211, 107, 0.08);
+  border-bottom: 1px solid #ffd36b;
+  box-shadow: 0 0 16px var(--glow-gold-strong);
+}
+
+/* --------------------------------------------------------------
+   13. METADATA / FRONTMATTER PROPERTIES
+   -------------------------------------------------------------- */
+.metadata-container {
+  background: radial-gradient(circle at top, #0b1b2b 0%, #05070d 100%);
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  box-shadow: 0 0 16px rgba(0, 255, 255, 0.15);
+  padding: 12px;
+  border-radius: 6px;
+}
+
+.metadata-container .metadata-properties-heading {
+  color: #ffd36b;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 211, 107, 0.3);
+  padding-bottom: 6px;
+}
+
+.metadata-property {
+  contain: paint;
+  background: rgba(0, 20, 40, 0.35);
+  border-left: 2px solid rgba(0, 255, 255, 0.5);
+  margin: 6px 0;
+  padding: 6px 8px;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+}
+
+.metadata-property:hover {
+  border-left: 2px solid #00ffff;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.25);
+  transform: translateX(2px);
+}
+
+.metadata-property-key {
+  color: #7de2ff;
+  font-family: monospace;
+}
+
+.metadata-property-value {
+  color: #ffd36b;
+  font-family: monospace;
+}
+
+/* --------------------------------------------------------------
+   14. APP BACKGROUND
+   The ambient glow is a single static `fixed` layer painted once
+   — cheap as long as nothing here is animated. Keep it that way.
+   -------------------------------------------------------------- */
+.workspace {
+  background: radial-gradient(circle at top, #0b1b2b 0%, #05070d 100%);
+}
+
+.app-container::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 20% 10%, rgba(0, 255, 255, 0.05), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(255, 211, 107, 0.04), transparent 50%);
+}
