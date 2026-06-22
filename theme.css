@@ -13,7 +13,7 @@
    -------------------------------------------------------------- */
 :root {
   --protoss-background-color: #061727;
-  --protoss-background-color-alt: #0d1219;
+  --protoss-background-color-alt: #051421;
   --protoss-yellow-color: #c9a03c;
   --protoss-cyan-color: #4adede;
   --protoss-purple-color: #5f3082;
@@ -40,7 +40,7 @@
    -------------------------------------------------------------- */
 body {
   font-family: "Oxanium", sans-serif;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .markdown-rendered,
@@ -54,12 +54,12 @@ body {
 .callout {
   font-family: "Oxanium", sans-serif;
   letter-spacing: 1.5px;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .theme-dark {
   font-family: "Oxanium", sans-serif;
-  font-size: 13px;
+  font-size: 15px;
 
   /* Background */
   --background-primary: var(--protoss-background-color);
@@ -194,7 +194,9 @@ h1,
 h2,
 h3,
 h4 {
-  text-shadow: 0 0 5px var(--glow-gold-soft), 0 0 15px rgba(255, 215, 0, 0.2);
+  text-shadow:
+    0 0 5px var(--glow-gold-soft),
+    0 0 15px rgba(255, 215, 0, 0.2);
 }
 
 /* --------------------------------------------------------------
@@ -213,8 +215,12 @@ h4 {
   border: 2px solid #00c8ff;
   border-radius: 25px 0 25px 0;
   background: linear-gradient(180deg, #18232f 0%, #0c1218 100%);
-  box-shadow: inset 0 0 8px var(--glow-cyan-soft), 0 0 10px var(--glow-cyan-soft);
-  transition: box-shadow var(--t-med), transform var(--t-med);
+  box-shadow:
+    inset 0 0 8px var(--glow-cyan-soft),
+    0 0 10px var(--glow-cyan-soft);
+  transition:
+    box-shadow var(--t-med),
+    transform var(--t-med);
 }
 
 .callout::before {
@@ -251,7 +257,12 @@ h4 {
   left: -10%;
   width: 80%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.15), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.15),
+    transparent
+  );
   transform: translateX(-100%);
   transition: transform 0.6s ease;
   pointer-events: none;
@@ -273,7 +284,9 @@ h4 {
 
 .callout:hover {
   border-color: #4deeff;
-  box-shadow: inset 0 0 12px var(--glow-cyan-strong), 0 0 18px var(--glow-cyan-strong);
+  box-shadow:
+    inset 0 0 12px var(--glow-cyan-strong),
+    0 0 18px var(--glow-cyan-strong);
   transform: translateY(-2px);
 }
 
@@ -287,19 +300,31 @@ h4 {
 .markdown-rendered table {
   position: relative;
   width: 100%;
-  background: linear-gradient(rgba(15, 20, 45, 0.9), rgba(15, 20, 45, 0.9)),
+  background:
+    linear-gradient(rgba(15, 20, 45, 0.9), rgba(15, 20, 45, 0.9)),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpolygon points='30,0 60,15 60,37 30,52 0,37 0,15' fill='none' stroke='%23334466' stroke-width='1'/%3E%3C/svg%3E");
   border: 1px solid #ffd700;
   border-collapse: collapse;
-  box-shadow: 0 0 8px var(--glow-gold-soft), inset 0 0 8px rgba(0, 180, 255, 0.15);
+  box-shadow:
+    0 0 8px var(--glow-gold-soft),
+    inset 0 0 8px rgba(0, 180, 255, 0.15);
 }
 
 .markdown-rendered table::before {
   content: "";
   display: block;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #00d4ff, #ffd700, #00d4ff, transparent);
-  box-shadow: 0 0 10px #00d4ff, 0 0 20px #ffd700;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #00d4ff,
+    #ffd700,
+    #00d4ff,
+    transparent
+  );
+  box-shadow:
+    0 0 10px #00d4ff,
+    0 0 20px #ffd700;
 }
 
 .markdown-rendered th {
@@ -326,7 +351,10 @@ h4 {
 }
 
 .markdown-rendered tbody tr {
-  transition: background var(--t-fast), box-shadow var(--t-fast), color var(--t-fast);
+  transition:
+    background var(--t-fast),
+    box-shadow var(--t-fast),
+    color var(--t-fast);
 }
 
 .markdown-rendered tbody tr:hover {
@@ -353,12 +381,16 @@ input[type="checkbox"]:hover {
 .HyperMD-task-line,
 li.task-list-item {
   position: relative;
-  transition: background var(--t-fast), box-shadow var(--t-fast);
+  transition:
+    background var(--t-fast),
+    box-shadow var(--t-fast);
 }
 
 li.task-list-item:hover {
   background: rgba(0, 212, 255, 0.05);
-  box-shadow: inset 2px 0 0 #00d4ff, 0 0 10px rgba(0, 212, 255, 0.2);
+  box-shadow:
+    inset 2px 0 0 #00d4ff,
+    0 0 10px rgba(0, 212, 255, 0.2);
   border-radius: 4px;
 }
 
@@ -387,7 +419,9 @@ li.task-list-item::before {
    -------------------------------------------------------------- */
 .markdown-rendered ul ul {
   border-left: 1px solid rgba(0, 212, 255, 0.3);
-  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  transition:
+    border-color var(--t-fast),
+    box-shadow var(--t-fast);
 }
 
 .markdown-rendered ul ul:hover {
@@ -432,7 +466,12 @@ ul ul ul ul li::before {
   left: -25%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.15), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 212, 255, 0.15),
+    transparent
+  );
   transform: translateX(-100%);
   transition: transform 0.4s ease;
 }
@@ -449,7 +488,9 @@ ul ul ul ul li::before {
     rgba(255, 215, 0, 0.15)
   );
   color: white;
-  box-shadow: inset 0 0 10px var(--glow-gold-strong), 0 0 15px var(--glow-gold-strong);
+  box-shadow:
+    inset 0 0 10px var(--glow-gold-strong),
+    0 0 15px var(--glow-gold-strong);
 }
 
 /* --------------------------------------------------------------
@@ -458,7 +499,9 @@ ul ul ul ul li::before {
 .prompt {
   contain: paint;
   border: 1px solid #ffd700;
-  box-shadow: 0 0 12px var(--glow-gold-soft), inset 0 0 20px rgba(0, 212, 255, 0.08);
+  box-shadow:
+    0 0 12px var(--glow-gold-soft),
+    inset 0 0 20px rgba(0, 212, 255, 0.08);
   clip-path: polygon(
     20px 0,
     calc(100% - 20px) 0,
@@ -473,7 +516,10 @@ ul ul ul ul li::before {
 }
 
 .prompt:hover {
-  box-shadow: 0 0 18px #00d4ff, 0 0 28px var(--glow-gold-strong), inset 0 0 20px rgba(0, 212, 255, 0.12);
+  box-shadow:
+    0 0 18px #00d4ff,
+    0 0 28px var(--glow-gold-strong),
+    inset 0 0 20px rgba(0, 212, 255, 0.12);
 }
 
 /* --------------------------------------------------------------
@@ -510,12 +556,34 @@ ul ul ul ul li::before {
 .workspace-split.mod-left-split,
 .workspace-split.mod-right-split {
   background-color: #060a0d !important;
-  background-image: radial-gradient(circle at 12% 22%, rgba(255, 255, 255, 0.55) 0.6px, transparent 1.2px),
-    radial-gradient(circle at 68% 58%, rgba(255, 255, 255, 0.4) 0.6px, transparent 1.2px),
-    radial-gradient(circle at 38% 82%, rgba(125, 226, 255, 0.45) 0.7px, transparent 1.4px),
-    radial-gradient(circle at 85% 18%, rgba(201, 160, 60, 0.35) 0.7px, transparent 1.4px),
+  background-image:
+    radial-gradient(
+      circle at 12% 22%,
+      rgba(255, 255, 255, 0.55) 0.6px,
+      transparent 1.2px
+    ),
+    radial-gradient(
+      circle at 68% 58%,
+      rgba(255, 255, 255, 0.4) 0.6px,
+      transparent 1.2px
+    ),
+    radial-gradient(
+      circle at 38% 82%,
+      rgba(125, 226, 255, 0.45) 0.7px,
+      transparent 1.4px
+    ),
+    radial-gradient(
+      circle at 85% 18%,
+      rgba(201, 160, 60, 0.35) 0.7px,
+      transparent 1.4px
+    ),
     linear-gradient(180deg, #0c1530 0%, #050912 45%, #03060c 100%);
-  background-size: 160px 160px, 190px 190px, 220px 220px, 240px 240px, 100% 100%;
+  background-size:
+    160px 160px,
+    190px 190px,
+    220px 220px,
+    240px 240px,
+    100% 100%;
   background-repeat: repeat;
   box-shadow: 5px 0 16px rgba(0, 255, 255, 0.08);
 }
@@ -538,7 +606,6 @@ ul ul ul ul li::before {
   border-left: 1px solid rgba(0, 255, 255, 0.2);
 }
 
-
 .nav-files-container {
   padding: 8px;
 }
@@ -549,7 +616,10 @@ ul ul ul ul li::before {
   padding: 6px 8px;
   margin: 2px 0;
   border-left: 2px solid transparent;
-  transition: background var(--t-fast), box-shadow var(--t-fast), border-color var(--t-fast),
+  transition:
+    background var(--t-fast),
+    box-shadow var(--t-fast),
+    border-color var(--t-fast),
     transform var(--t-fast);
 }
 
@@ -589,7 +659,9 @@ ul ul ul ul li::before {
   color: #7de2ff;
   font-family: monospace;
   border: 1px solid transparent;
-  transition: background var(--t-fast), box-shadow var(--t-fast);
+  transition:
+    background var(--t-fast),
+    box-shadow var(--t-fast);
 }
 
 .workspace-tab-header:hover {
@@ -630,7 +702,10 @@ ul ul ul ul li::before {
   border-left: 2px solid rgba(0, 255, 255, 0.5);
   margin: 6px 0;
   padding: 6px 8px;
-  transition: border-color var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
+  transition:
+    border-color var(--t-fast),
+    box-shadow var(--t-fast),
+    transform var(--t-fast);
 }
 
 .metadata-property:hover {
@@ -663,6 +738,15 @@ ul ul ul ul li::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(circle at 20% 10%, rgba(0, 255, 255, 0.05), transparent 40%),
-    radial-gradient(circle at 80% 90%, rgba(255, 211, 107, 0.04), transparent 50%);
+  background:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(0, 255, 255, 0.05),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 90%,
+      rgba(255, 211, 107, 0.04),
+      transparent 50%
+    );
 }
