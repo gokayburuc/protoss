@@ -5,6 +5,14 @@
 Protoss Theme Preview *(Replace with actual screenshot later!)*
 
 ---
+## Screenshots 
+
+![ss1](./img/ss-1.png)
+![ss2](./img/ss-2.png)
+![ss3](./img/ss-3.png)
+![ss4](./img/ss-4.png)
+![ss5](./img/ss-5.png)
+![ss6](./img/ss-6.png)
 
 ## ⚡ Features
 
